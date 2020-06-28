@@ -6,6 +6,8 @@ LimitX/LimitX are inputs. High = switch active, Low = switch non-active (normal)
 
 Step_x/Step_y are the step inputs. Min 4.5us pulse width. Your system MUST be geared to 1000 steps per inch of travel. Remember that RetinaEngrave only outputs 2mA at 3.3v on its outputs. You MUST use a 5v buffer or breakout board with buffers to use most standalone stepper drivers because they have optical isolators that require 25mA at 5v.
 
+1000 steps/in = 39 steps/mm
+
 Dir_x/Dir_y are the direction inputs. Direction is changable in the config.xml file.
 
 RELAY: PWM laser power control. If high, laser is on. If low, laser is off. Setup as PWM spindle in Mach3. S1000 for 1000% power. Set S10 for 1% power.
@@ -19,3 +21,9 @@ Warning: It is not recommended to run the laser with the PC parallel port interf
 We strongly recommended using Full Spectrum Laser USB RetinaEngrave board whenever possible.
 
 These connections ensure the laser will not turn on unexpectedly when booting the computer.
+
+GRBL settings:
+```
+G21 (All units in mm)
+
+```
