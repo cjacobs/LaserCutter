@@ -147,7 +147,19 @@ HOME_SEARCH_VEL = 0.0
 
 
 ## Gcode header settings:
+
+Relevant Gcode commands:
+
+`S`: Sets the spindle speed
+`M3`: Sets spindle pin to PWM rate as specified by the `S` command, sets direction pin high.
+`M4`: Sets spindle pin to PWM rate as specified by the `S` command, sets direction pin low.
+`M5`: Sets spindle pin to Low. Doesn't change direction pin.
+`M7`/`M8`: Sets coolant pin high.
+`M9`: Sets cooland pin low.
+
 ```
 G21 (All units in mm)
+G0 (stop)
+S0 (turn off laser)
 
 ```
