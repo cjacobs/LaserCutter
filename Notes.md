@@ -1,5 +1,8 @@
 # Notes
 
+## LaserWeb
+https://laserweb.github.io/LaserWeb4/
+
 ## bCNC (Gcode sender)
 https://github.com/vlachoudis/bCNC.git
 
