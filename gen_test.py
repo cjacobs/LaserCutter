@@ -3,8 +3,10 @@ import sys
 sys.path.append("Fonts")
 import asteroids
 
-OFFSET = 14
-SPACING = 18
+X_OFFSET = 14
+Y_OFFSET = 14
+X_SPACING = 16
+Y_SPACING = 16
 
 font = asteroids.get_font()
 
@@ -41,8 +43,8 @@ def svg_text(x, y, text):
     # return """<text x="{}" y="{}" font-face="American typewriter" font-size="4">{}</text>\n""".format(x, y, text)
 
 def svg_experiment(f, s, xpos, ypos):
-    x = OFFSET + SPACING * xpos
-    y = OFFSET + SPACING * ypos
+    x = X_OFFSET + X_SPACING * xpos
+    y = Y_OFFSET + Y_SPACING * ypos
     w = 10
     h = 10
 
@@ -100,8 +102,8 @@ def gcode_text(x, y, text):
     return result
 
 def gcode_experiment(f, s, xpos, ypos):
-    x = OFFSET + SPACING * xpos
-    y = OFFSET + SPACING * ypos
+    x = X_OFFSET + X_SPACING * xpos
+    y = Y_OFFSET + Y_SPACING * ypos
     w = 10
     h = 10
 
@@ -134,9 +136,9 @@ if __name__ == "__main__":
     ss = [5, 10, 20, 50, 100, 200, 300, 400, 500]
 
     for xpos, f in reversed(list(enumerate(fs))):
-        print(text(OFFSET + xpos*SPACING - 2, 6, "F {}".format(f)))
+        print(text(X_OFFSET + xpos*X_SPACING, 6, "F {}".format(f)))
     for ypos, s in enumerate(ss):
-        print(text(0, OFFSET + ypos*SPACING + 4, "S {}".format(s)))
+        print(text(0, Y_OFFSET + ypos*Y_SPACING + 4, "S {}".format(s)))
 
     for xpos, f in reversed(list(enumerate(fs))):
         for ypos, s in enumerate(ss):
