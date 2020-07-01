@@ -73,7 +73,7 @@ S 0
 """.format(x, y, x+w, y, feed, spindle, x+w, y+w, x, y+w, x, y)
     
 def gcode_text(x, y, text):
-    feed = 200
+    feed = 400
     spindle = 20
     xpos = x
     ypos = y
@@ -88,7 +88,7 @@ def gcode_text(x, y, text):
             path = font[char]
             for pt in path:
                 if type(pt) is tuple:
-                    result += "{} X{} Y{}\n".format(mode, xpos+pt[0]*scale, ypos+(asteroids.FONT_HEIGHT-pt[1])*scale)
+                    result += "{} X{} Y{}\n".format(mode, xpos+pt[0]*scale, ypos+pt[1]*scale)
                     mode = "G1"
                 elif pt == asteroids.FONT_UP:
                     mode = "G0"
@@ -106,6 +106,10 @@ def gcode_experiment(f, s, xpos, ypos):
     h = 10
 
     return gcode_rect(x, y, w, h, f, s)
+
+def should_run(f, s):
+    # Don't run F=50, S=100
+    return f / s > 0.45
 
 def gcode_footer():
     return "M5          ; Switch tool off\n"
@@ -129,14 +133,15 @@ if __name__ == "__main__":
     fs = [50, 100, 150, 200, 250, 300, 400, 500]
     ss = [5, 10, 20, 50, 100, 200, 300, 400, 500]
 
-    for xpos, f in enumerate(fs):
+    for xpos, f in reversed(list(enumerate(fs))):
         print(text(OFFSET + xpos*SPACING - 2, 6, "F {}".format(f)))
     for ypos, s in enumerate(ss):
         print(text(0, OFFSET + ypos*SPACING + 4, "S {}".format(s)))
 
-    for xpos, f in enumerate(fs):
+    for xpos, f in reversed(list(enumerate(fs))):
         for ypos, s in enumerate(ss):
-            print(experiment(f, s, xpos, ypos))
+            if should_run(f, s):
+                print(experiment(f, s, xpos, ypos))
 
     print(footer())
 
